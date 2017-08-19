@@ -38,4 +38,4 @@
     (let [mc (moveable-create [1 2 3])
           mm (moveable-move-to mc [4 5 6])
           new-coords (moveable-coords mm)]
-      (is (= [4 5 6] new-coords) "Moveable should have been moved to correct coordinates."))))
+      (is (= [4 5 6] new-coords) "Moveable should have been moved to correct "))))
