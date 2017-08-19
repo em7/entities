@@ -12,20 +12,25 @@
   Returns a map with keys :result (true or false if failure)
   and :reason (nil if :result is true, string with message
   otherwise)."
-  [all-entities name]
+  [entities name]
   (if (or (not (string? name))
           (str/blank? name))
     {:result false :reason "Name of the entity should be a non-empty string."}
 
-    (if (some #(= name %) all-entities)
+    (if (some #(= name %) entities)
       {:result false :reason "Name of the entity should be unique."}
-      {:result true :reason nil})))
+      {:result true})))
 
 
-;; (defn create-entity
-;;   "Creates a named entity. The name should be a unique string."
-;;   [name]
-;;   (if (some #()))
-;;   )
+(defn create-entity
+  "Creates a named entity. The name should be a unique string.
+  If entity creates successfully, returns a map with :result true :response entity;
+  otherwise :result false :response nil :reason string - the reason why it failed."
+  [entities name]
+  (let [name-valid (entity-name-valid? entities name)]
+    (if-not (:result name-valid)
+      {:result false :reason (:reason name-valid)}
+      (let [entity {:name name}]
+        (conj entities entity)))))
 
 
