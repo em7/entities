@@ -36,6 +36,10 @@
             ents (conj entities entity)]
         {:result true :response {:entity entity :entities ents}}))))
 
+
+
+;; is adding a component to an entity really correct?
+
 (defn add-component
   "Adds a component to the entity. Returns a new entity with added component."
   [component entity]
