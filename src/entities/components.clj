@@ -33,12 +33,19 @@
        (= moveable-name (:name comp))))
 
 (defn moveable-coords
-  "Returns the coordinates from a moveable component."
+  "Returns the coordinates of moveable component."
   [comp]
   (::coords (:state comp)))
+
+(defn moveable-speed
+  "Returns the speed of moveable component."
+  [comp]
+  (::speed (:state comp)))
 
 (defn moveable-move-to
   "Sets new coordinates to state of moveable component. Returns an updated entity."
   [comp new-coords]
   (assoc-in comp [:state ::coords] new-coords))
+
+
 

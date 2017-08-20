@@ -38,6 +38,11 @@
     (let [mc (moveable-create [1 2 3])]
       (is (= [1 2 3] (moveable-coords mc)) "Got wrong coordinates from moveable component."))))
 
+(deftest moveable-speed-test
+  (testing "Getting correct speed from moveable component."
+    (let [mc (moveable-create nil 5.5)]
+      (is (= 5.5 (moveable-speed mc))))))
+
 (deftest moveable-move-to-test
   (testing "New coordinates should be assigned to moveable."
     (let [mc (moveable-create [1 2 3])
