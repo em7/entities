@@ -1,3 +1,5 @@
+
+#Java
 /target
 /classes
 /checkouts
@@ -5,7 +7,16 @@ pom.xml
 pom.xml.asc
 *.jar
 *.class
+
+#Leiningen, NREPL
 /.lein-*
 /.nrepl-port
+
+#HG ... added automagically by Leiningen
 .hgignore
 .hg/
+
+#EMACS and CIDER files
+\#*\#
+.\#*
+*~
