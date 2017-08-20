@@ -18,9 +18,12 @@
 
 (defn moveable-create
   "Creates a component which allows the entity to move on its own. Such entity
-  should not be a part of the map itself, however it knows its position itself."
-  [coords]
-  (create-component moveable-name {::coords coords}))
+  should not be a part of the map itself, however it knows its position itself.
+  If speed is not provided, 1.0 is assumed."
+  ([coords]
+   (moveable-create coords 1.0))
+  ([coords speed]
+   (create-component moveable-name {::coords coords ::speed speed})))
 
 (defn moveable?
   "Checks whether the component is a Moveable."

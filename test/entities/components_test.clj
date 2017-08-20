@@ -20,7 +20,12 @@
     (let [mc (moveable-create [5 6])
           [x y] (:entities.components/coords (:state mc))]
       (is (and (= 5 x) (= 6 y)) "Moveable component created with correct coordinates.")
-      (is (= moveable-name (:name mc)) "Moveable component created with correct name."))))
+      (is (= moveable-name (:name mc)) "Moveable component created with correct name.")))
+  (testing "Setting speed to a moveable component."
+    (let [mc1 (moveable-create nil)
+          mc2 (moveable-create nil 5.9)]
+      (is (= 1.0 (:entities.components/speed (:state mc1))) "If created without setting speed, 1.0 should be assumed.")
+      (is (= 5.9 (:entities.components/speed (:state mc2))) "If created with 5.9 speed, the speed should be 5.9."))))
 
 (deftest moveable?-test
   (testing "Moveable should be a component."
