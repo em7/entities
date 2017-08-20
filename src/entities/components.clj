@@ -19,11 +19,18 @@
 (defn moveable-create
   "Creates a component which allows the entity to move on its own. Such entity
   should not be a part of the map itself, however it knows its position itself.
-  If speed is not provided, 1.0 is assumed."
+  If speed is not provided, 1.0 is assumed. Coords should be a vector and speed float.
+  If coords is not a vector and speed is not float, then map is returned
+  with :result false, :response nil and :reason string reason. If OK then map is returned
+  with :result true, :response component and :reason nil."
   ([coords]
    (moveable-create coords 1.0))
   ([coords speed]
-   (create-component moveable-name {::coords coords ::speed speed})))
+   (if-not (vector? coords)
+     {:result false :reason "Coordinates should be a vector."}
+     (if-not (float? speed)
+       {:result false :reason "Speed should be float."}
+       {:result true :response (create-component moveable-name {::coords coords ::speed speed})}))))
 
 (defn moveable?
   "Checks whether the component is a Moveable."

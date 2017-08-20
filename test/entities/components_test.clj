@@ -17,15 +17,20 @@
 
 (deftest moveable-create-test
   (testing "Creating a new moveable component."
-    (let [mc (moveable-create [5 6])
+    (let [mc (:response (moveable-create [5 6]))
           [x y] (:entities.components/coords (:state mc))]
       (is (and (= 5 x) (= 6 y)) "Moveable component created with correct coordinates.")
       (is (= moveable-name (:name mc)) "Moveable component created with correct name.")))
   (testing "Setting speed to a moveable component."
-    (let [mc1 (moveable-create nil)
-          mc2 (moveable-create nil 5.9)]
+    (let [mc1 (:response (moveable-create []))
+          mc2 (:response (moveable-create [] 5.9))]
       (is (= 1.0 (:entities.components/speed (:state mc1))) "If created without setting speed, 1.0 should be assumed.")
-      (is (= 5.9 (:entities.components/speed (:state mc2))) "If created with 5.9 speed, the speed should be 5.9."))))
+      (is (= 5.9 (:entities.components/speed (:state mc2))) "If created with 5.9 speed, the speed should be 5.9.")))
+  (testing "If moveable created with wrong data types, false :result should be returned."
+    (let [mr1 (:result (moveable-create nil 1.5))
+          mr2 (:result (moveable-create [] "a"))]
+      (is (false? mr1) "Creating moveable with non-vector coords should result in falsey :result.")
+      (is (false? mr2) "Creating moveable with non-float speed should result in falsey :result."))))
 
 (deftest moveable?-test
   (testing "Moveable should be a component."
