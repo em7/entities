@@ -53,6 +53,11 @@
     (let [ent (:response (create-entity '() "Test Osteron"))]
       (is (= "Test Osteron" (:name ent)) "New entity should be named correctly if created separately."))))
 
+(deftest entity-name-test
+  (testing "Getting the entity name."
+    (let [ent (:response (create-entity '() "Test"))]
+      (is (= "Test" (entity-name ent))))))
+
 
 
 
