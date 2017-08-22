@@ -26,22 +26,23 @@
                  (conj n nn)))))))
 
 (defn move
-  "If component is moveable, creates a new moveable component with updated
-  coordinates. Direction is a movement vector. The vector should have the same
-  number of components as the component coordinates vector. New position is
-  calculated as follows:
+  "If component is moveable, creates a new moveable component with
+  updated coordinates. Direction is a movement vector. The vector
+  should have the same number of components as the component
+  coordinates vector. New position is calculated as follows:
   
-  x1 = x1 + (d1 * v)
-  x2 = x2 + (d2 * v)
-  where x1 is next/previous coordinate, d1 is component of a direction vector
-  and v is the velocity.
+  x1 = x1 + (d1 * v) x2 = x2 + (d2 * v) where x1 is next/previous
+  coordinate, d1 is component of a direction vector and v is the
+  velocity.
 
-  The calculated coordinates and the previous ones are passed to the bound-f which
-  should be a (fn [previous-coordinates next-coordinates] ...) returning next coordinates
-  possibly changed to be valid. E.g. if previous coordinates are 2 distance units left of wall
-  and the entity needs to move right where the speed is 3, the next-coordinates are in the wall.
-  The bound-f should return coordinates 1 square left of wall which is the maximum distance
-  the entity can move because of the wall."
+  The calculated coordinates and the previous ones are passed to the
+  bound-f which should be a (fn [previous-coordinates
+  next-coordinates] ...) returning next coordinates possibly changed
+  to be valid. E.g. if previous coordinates are 2 distance units left
+  of wall and the entity needs to move right where the speed is 3, the
+  next-coordinates are in the wall.  The bound-f should return
+  coordinates 1 square left of wall which is the maximum distance the
+  entity can move because of the wall."
   [direction bound-f component]
   {})
 
