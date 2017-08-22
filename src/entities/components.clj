@@ -25,8 +25,6 @@
   [comp]
   (:entity comp))
 
-(def moveable-name ::moveable)
-
 (defn moveable-create
   "Creates a component which allows the entity to move on its
   own. Such entity should not be a part of the map itself, however it
@@ -45,29 +43,22 @@
      (if-not (float? speed)
        {:result false :reason "Speed should be float."}
        {:result true
-        :response (create-component entity-name moveable-name {::coords coords ::speed speed})}))))
+        :response (create-component entity-name :moveable {:coords coords :speed speed})}))))
 
 (defn moveable?
   "Checks whether the component is a Moveable."
   [comp]
   (and (component? comp)
        (not (nil? (:name comp)))
-       (= moveable-name (:name comp))))
-
-(defn moveable-coords
-  "Returns the coordinates of moveable component."
-  [comp]
-  (::coords (:state comp)))
-
-(defn moveable-speed
-  "Returns the speed of moveable component."
-  [comp]
-  (::speed (:state comp)))
+       (= :moveable (:name comp))
+       (not (nil? (get-in comp [:state :coords])))
+       (not (nil? (get-in comp [:state :speed])))))
 
 (defn moveable-move-to
   "Sets new coordinates to state of moveable component. Returns an updated entity."
   [comp new-coords]
   (assoc-in comp [:state ::coords] new-coords))
+
 
 
 
