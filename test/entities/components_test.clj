@@ -52,11 +52,20 @@
     (is (false? (moveable? {:entity "ENT" :name :moveable :state {:speed 1.0}})) "Should not be Moveable component if :state has only :speed.")
     (is (false? (moveable? {:entity "ENT" :name :moveable :state {:coords []}})) "Should not be Moveable component if :state has only coords.")))
 
+(deftest moveable-coords-test
+  (testing "Should return correct coordinates from Moveable component."
+    (let [mc (:response (moveable-create "ENT" [1 2]))]
+      (is (= [1 2] (moveable-coords mc))))))
+
+(deftest moveable-speed-test
+  (testing "Should return correct speed from Moveable component."
+    (let [mc (:response (moveable-create "ENT" [1 2] 5.9))]
+      (is (= 5.9 (moveable-speed mc))))))
+
 (deftest moveable-move-to-test
   (testing "New coordinates should be assigned to moveable."
     (let [mc (:response (moveable-create "ENT" [1 2 3]))
           mm (moveable-move-to mc [4 5 6])
           new-coords (moveable-coords mm)]
       (is (= [4 5 6] new-coords) "Moveable should have been moved to correct "))))
-
 

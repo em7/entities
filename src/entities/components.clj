@@ -43,7 +43,9 @@
      (if-not (float? speed)
        {:result false :reason "Speed should be float."}
        {:result true
-        :response (create-component entity-name :moveable {:coords coords :speed speed})}))))
+        :response (create-component entity-name
+                                    :moveable
+                                    {:coords coords :speed speed})}))))
 
 (defn moveable?
   "Checks whether the component is a Moveable."
@@ -54,10 +56,20 @@
        (not (nil? (get-in comp [:state :coords])))
        (not (nil? (get-in comp [:state :speed])))))
 
+(defn moveable-coords
+  "Returns coordinates from moveable component state."
+  [moveable]
+  (get-in moveable [:state :coords]))
+
+(defn moveable-speed
+  "Returns speed from moveable component state."
+  [moveable]
+  (get-in moveable [:state :speed]))
+
 (defn moveable-move-to
   "Sets new coordinates to state of moveable component. Returns an updated entity."
-  [comp new-coords]
-  (assoc-in comp [:state ::coords] new-coords))
+  [moveable new-coords]
+  (assoc-in moveable [:state :coords] new-coords))
 
 
 
