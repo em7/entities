@@ -67,7 +67,7 @@
   (get-in moveable [:state :speed]))
 
 (defn moveable-move-to
-  "Sets new coordinates to state of moveable component. Returns an updated entity."
+  "Sets new coordinates to state of moveable component. Returns an updated component."
   [moveable new-coords]
   (assoc-in moveable [:state :coords] new-coords))
 
